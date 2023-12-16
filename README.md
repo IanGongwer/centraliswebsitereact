@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+# CentralisWebsiteReact
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the CentralisCC website that includes announcements, latest developer updates, live player statistics, and more. Below are images of each page and a video walkthrough is available at the bottom of the ReadME.
 
-## Available Scripts
+The All-Time Statistics update at the end of every game. The game information live kill feed update automatically.
 
-In the project directory, you can run:
+# Page Banner
+![image](https://user-images.githubusercontent.com/63007329/186738199-7a8b03a9-ff35-4082-8497-18c917187b77.png)
 
-### `npm start`
+# Announcements
+![image](https://user-images.githubusercontent.com/63007329/186738088-ebc47657-e608-4cdc-8c54-f10eda810e1f.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Development Log
+![image](https://user-images.githubusercontent.com/63007329/186738054-8fee1e4f-dafb-4d1c-8201-6df6b2eab7f5.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Top 10 All-Time Players Statistics
+![image](https://user-images.githubusercontent.com/63007329/186737775-9a95f698-5262-4a8c-9550-0d3289551bb7.png)
 
-### `npm test`
+# Active Scenarios
+![image](https://user-images.githubusercontent.com/63007329/186737882-26bcfd99-d654-4368-84ee-affb2d6d650c.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Custom In-Game Recipes
+![image](https://user-images.githubusercontent.com/63007329/186737942-2201e73c-57c1-4951-b5d9-f4efa9b9a7fc.png)
+![image](https://user-images.githubusercontent.com/63007329/186737978-3b1e95c3-80f1-4302-afe9-4da809a8c54b.png)
 
-### `npm run build`
+# Game Information
+![image](https://user-images.githubusercontent.com/63007329/187274302-94b9df72-636d-4dfc-a0f1-a8ee1d0571c9.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Video Walkthrough
+https://user-images.githubusercontent.com/63007329/187273927-d7186f6d-7b8c-45b0-a6cc-15654d13fc5d.mp4
