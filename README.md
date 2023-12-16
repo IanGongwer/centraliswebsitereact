@@ -1,6 +1,6 @@
 # CentralisWebsiteReact
 
-This is the CentralisCC website that includes announcements, latest developer updates, live player statistics, and more. Below are images of each page and a video walkthrough is available at the bottom of the ReadME.
+This is the CentralisClub website that includes announcements, latest developer updates, live player statistics, and more. Below are images of each page and a video walkthrough is available at the bottom of the ReadME.
 
 The All-Time Statistics update at the end of every game. The game information live kill feed update automatically.
 
