@@ -157,6 +157,10 @@ hr {
     text-align: center;
 }
 
+#statscontainer img {
+    padding-top: .75rem;
+}
+
 /* Game Information */
 #gameinfocontainer {
     display: flex;
@@ -172,22 +176,26 @@ hr {
 }
 
 #livekillscontainer {
-    margin: 3rem auto;
+    flex-direction: column;
+    align-items: center;
     background-color: #313742;
+    max-width: 1000px;
+    margin: 3rem auto;
     border-radius: .5rem;
 }
 
 #livekillscontainer tr {
     font-weight: 500;
     font-size: 1.5rem;
-}
-
-#livekillscontainer th {
-    padding: 0 1rem;
     text-align: center;
 }
 
 #livekillscontainer td {
-    padding: 0 1rem;
+    padding: 0 1.5rem;
     text-align: center;
+}
+
+#livekillscontainer img {
+    padding-top: .75rem;
+    margin-right: -2rem;
 }

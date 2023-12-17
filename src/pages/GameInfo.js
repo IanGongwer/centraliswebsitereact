@@ -3,7 +3,7 @@ import "../App.css";
 
 const GameInfo = () => {
     const [getData, setData] = useState([0]);
-    // const [getKillData, setKillData] = useState([0]);
+    const [getKillData, setKillData] = useState([0]);
 
     useEffect(() => {
         fetch("http://localhost:3001/gameinformation")
@@ -11,11 +11,31 @@ const GameInfo = () => {
             .then((data) => setData(data));
     }, []);
 
-    // useEffect(() => {
-    //     fetch("http://localhost:3001/killfeed")
-    //         .then((res) => res.json())
-    //         .then((data) => setKillData(data));
-    // }, []);
+    useEffect(() => {
+        const interval = setInterval(() =>
+            fetch("http://localhost:3001/gameinformation")
+                .then((res) => res.json())
+                .then((data) => setData(data)), 1000);
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
+
+    useEffect(() => {
+        fetch("http://localhost:3001/killfeed")
+            .then((res) => res.json())
+            .then((data) => setKillData(data));
+    }, []);
+
+    useEffect(() => {
+        const interval = setInterval(() =>
+            fetch("http://localhost:3001/killfeed")
+                .then((res) => res.json())
+                .then((data) => setKillData(data)), 1000);
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
 
     return (
         <div className="GameInfo">
@@ -27,7 +47,7 @@ const GameInfo = () => {
                 <h2>Game State: {getData[0].game_state}</h2>
             </div>
             <h1>Live Kill Feed</h1>
-            {/* <table id="livekillscontainer">
+            <table id="livekillscontainer">
                 {
                     getKillData.map((event) => {
                         return (
@@ -37,23 +57,31 @@ const GameInfo = () => {
                         )
                     })
                 }
-            </table> */}
+            </table>
         </div >
     );
 }
 
-// function renderKillFeed(event) {
-//     if (event.killer_name != "") {
-//         <td>
-//             <h3><img src={"https://minotar.net/avatar/" + event.player_name + "/35"} alt="Avatar 35x35"></img>{event.player_name + " has been killed by " + event.killer_name}</h3>
-//         </td>
-//     } else {
-//         <td>
-//             <h3>{event.player_name + " has been killed mysteriously"}</h3>
-//         </td>
-
-//     }
-// }
+function renderKillFeed(event) {
+    if (event.killer_name !== "") {
+        return (
+            <tr>
+                <td>
+                    <h3><img src={"https://minotar.net/avatar/" + event.player_name + "/35"} alt="Avatar 35x35"></img></h3>
+                </td>
+                <td>
+                    <h3>{event.player_name + " has been killed by " + event.killer_name}</h3>
+                </td>
+            </tr>
+        )
+    } else {
+        return (
+            <td>
+                <h3>{event.player_name + " has been killed mysteriously"}</h3>
+            </td>
+        )
+    }
+}
 
 function getGameTimeFormatted(gameTime) {
     let second = gameTime % 60;

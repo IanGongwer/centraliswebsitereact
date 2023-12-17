@@ -10,6 +10,16 @@ const Stats = () => {
             .then((data) => setData(data));
     }, []);
 
+    useEffect(() => {
+        const interval = setInterval(() =>
+            fetch("http://localhost:3001/players")
+                .then((res) => res.json())
+                .then((data) => setData(data)), 1000);
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
+
     return (
         <div className="Stats">
             <h1>TOP 10 ALL-TIME PLAYERS</h1>
