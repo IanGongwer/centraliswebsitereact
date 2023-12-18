@@ -4,60 +4,77 @@ import "../App.css";
 const GameInfo = () => {
     const [getData, setData] = useState([0]);
     const [getKillData, setKillData] = useState([0]);
+    const [getError, setError] = useState(null);
 
     useEffect(() => {
         fetch("http://localhost:3001/gameinformation")
             .then((res) => res.json())
-            .then((data) => setData(data));
+            .then((data) => setData(data))
+            .catch(err => {
+                setError(err.message);
+            });
     }, []);
 
     useEffect(() => {
-        const interval = setInterval(() =>
-            fetch("http://localhost:3001/gameinformation")
-                .then((res) => res.json())
-                .then((data) => setData(data)), 1000);
-        return () => {
-            clearInterval(interval);
-        };
-    }, []);
+        if (!getError) {
+            const interval = setInterval(() =>
+                fetch("http://localhost:3001/gameinformation")
+                    .then((res) => res.json())
+                    .then((data) => setData(data))
+                    .catch(err => {
+                        setError(err.message);
+                    }), 1000);
+            return () => {
+                clearInterval(interval);
+            };
+        }
+    }, [getError]);
 
     useEffect(() => {
-        fetch("http://localhost:3001/killfeed")
-            .then((res) => res.json())
-            .then((data) => setKillData(data));
-    }, []);
-
-    useEffect(() => {
-        const interval = setInterval(() =>
+        if (!getError) {
             fetch("http://localhost:3001/killfeed")
                 .then((res) => res.json())
-                .then((data) => setKillData(data)), 1000);
-        return () => {
-            clearInterval(interval);
-        };
-    }, []);
+                .then((data) => setKillData(data))
+                .catch(err => {
+                    setError(err.message);
+                });
+        }
+    }, [getError]);
+
+    useEffect(() => {
+        if (!getError) {
+            const interval = setInterval(() =>
+                fetch("http://localhost:3001/killfeed")
+                    .then((res) => res.json())
+                    .then((data) => setKillData(data))
+                    .catch(err => {
+                        setError(err.message);
+                    }), 1000);
+            return () => {
+                clearInterval(interval);
+            };
+        }
+    }, [getError]);
 
     return (
         <div className="GameInfo">
-            <h1>Current Game Information</h1>
-            <div id="gameinfocontainer">
-                <h2>Players Left: {getData[0].players_left}</h2>
-                <h2>Border Size: {getData[0].border_size}</h2>
-                <h2>Game Time: {getGameTimeFormatted(getData[0].game_time)}</h2>
-                <h2>Game State: {getData[0].game_state}</h2>
-            </div>
-            <h1>Live Kill Feed</h1>
-            <table id="livekillscontainer">
-                {
-                    getKillData.map((event) => {
-                        return (
-                            <tr>
-                                {renderKillFeed(event)}
-                            </tr>
-                        )
-                    })
-                }
-            </table>
+            {!getError &&
+                <><h1>Current Game Information</h1><div id="gameinfocontainer">
+                    <h2>Players Left: {getData[0].players_left}</h2>
+                    <h2>Border Size: {getData[0].border_size}</h2>
+                    <h2>Game Time: {getGameTimeFormatted(getData[0].game_time)}</h2>
+                    <h2>Game State: {getData[0].game_state}</h2>
+                </div><h1>Live Kill Feed</h1><table id="livekillscontainer">
+                        {getKillData.map((event) => {
+                            return (
+                                <tr>
+                                    {renderKillFeed(event)}
+                                </tr>
+                            );
+                        })}
+                    </table></>
+            }
+            {getError && <h1 id="errormessage">Error: {getError}</h1>}
         </div >
     );
 }

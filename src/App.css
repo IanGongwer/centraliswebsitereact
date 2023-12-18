@@ -93,6 +93,8 @@ hr {
     padding: .5rem;
 }
 
+/* Main */
+
 #maincontainer {
     display: flex;
     flex-direction: column;
@@ -198,4 +200,10 @@ hr {
 #livekillscontainer img {
     padding-top: .75rem;
     margin-right: -2rem;
+}
+
+/* Error Messaging */
+
+#errormessage {
+    text-align: center;
 }
