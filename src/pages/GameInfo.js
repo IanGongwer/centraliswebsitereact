@@ -93,9 +93,14 @@ function renderKillFeed(event) {
         )
     } else {
         return (
-            <td>
-                <h3>{event.player_name + " has been killed mysteriously"}</h3>
-            </td>
+            <tr>
+                <td>
+                    <h3><img src={"https://minotar.net/avatar/" + event.player_name + "/35"} alt="Avatar 35x35"></img></h3>
+                </td>
+                <td>
+                    <h3>{event.player_name + " has been killed mysteriously"}</h3>
+                </td>
+            </tr>
         )
     }
 }
