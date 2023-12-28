@@ -4,6 +4,7 @@ import "../App.css";
 const GameInfo = () => {
     const [getData, setData] = useState([0]);
     const [getKillData, setKillData] = useState([0]);
+    const [getTeamsData, setTeamsData] = useState([0]);
     const [getError, setError] = useState(null);
 
     useEffect(() => {
@@ -44,9 +45,24 @@ const GameInfo = () => {
     useEffect(() => {
         if (!getError) {
             const interval = setInterval(() =>
-                fetch("http://localhost:3001/killfeed")
+                fetch("http://localhost:3001/teams")
                     .then((res) => res.json())
-                    .then((data) => setKillData(data))
+                    .then((data) => setTeamsData(data))
+                    .catch(err => {
+                        setError(err.message);
+                    }), 1000);
+            return () => {
+                clearInterval(interval);
+            };
+        }
+    }, [getError]);
+
+    useEffect(() => {
+        if (!getError) {
+            const interval = setInterval(() =>
+                fetch("http://localhost:3001/teams")
+                    .then((res) => res.json())
+                    .then((data) => setTeamsData(data))
                     .catch(err => {
                         setError(err.message);
                     }), 1000);
@@ -64,11 +80,35 @@ const GameInfo = () => {
                     <h2>Border Size: {getData[0].border_size}</h2>
                     <h2>Game Time: {getGameTimeFormatted(getData[0].game_time)}</h2>
                     <h2>Game State: {getData[0].game_state}</h2>
-                </div><h1>Live Kill Feed</h1><table id="livekillscontainer">
+                </div>
+                    <h1>Live Kill Feed</h1><table id="livekillscontainer">
                         {getKillData.map((event) => {
                             return (
                                 <tr>
                                     {renderKillFeed(event)}
+                                </tr>
+                            );
+                        })}
+                    </table>
+
+                    <h1>Teams Information</h1><table id="livekillscontainer">
+                        {getTeamsData.map((team) => {
+                            return (
+                                <tr>
+                                    <td>
+                                        <h3><img src={"https://minotar.net/avatar/" + team.team_name + "/35"} alt="Avatar 35x35"></img></h3>
+                                    </td>
+                                    <td>
+                                        <h3>{team.team_name} Team</h3>
+                                    </td>
+                                    <td>
+                                        <h3>Members:</h3>
+                                        {team.team_member.split(",").map((member) => {
+                                            return (
+                                                <h4>{member}</h4>
+                                            );
+                                        })}
+                                    </td>
                                 </tr>
                             );
                         })}
