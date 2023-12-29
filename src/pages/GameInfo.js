@@ -8,69 +8,25 @@ const GameInfo = () => {
     const [getError, setError] = useState(null);
 
     useEffect(() => {
-        fetch("http://localhost:3001/gameinformation")
-            .then((res) => res.json())
-            .then((data) => setData(data))
-            .catch(err => {
-                setError(err.message);
-            });
-    }, []);
-
-    useEffect(() => {
         if (!getError) {
-            const interval = setInterval(() =>
-                fetch("http://localhost:3001/gameinformation")
-                    .then((res) => res.json())
-                    .then((data) => setData(data))
-                    .catch(err => {
-                        setError(err.message);
-                    }), 1000);
-            return () => {
-                clearInterval(interval);
-            };
-        }
-    }, [getError]);
-
-    useEffect(() => {
-        if (!getError) {
-            fetch("http://localhost:3001/killfeed")
-                .then((res) => res.json())
-                .then((data) => setKillData(data))
+            Promise.all([
+                fetch('http://localhost:3001/gameinformation'),
+                fetch('http://localhost:3001/killfeed'),
+                fetch('http://localhost:3001/teams'),
+            ])
+                .then(([resGI, resKF, resT]) =>
+                    Promise.all([resGI.json(), resKF.json(), resT.json()])
+                )
+                .then(([resGI, resKF, resT]) => {
+                    setData(resGI);
+                    setKillData(resKF);
+                    setTeamsData(resT);
+                })
                 .catch(err => {
                     setError(err.message);
                 });
         }
-    }, [getError]);
-
-    useEffect(() => {
-        if (!getError) {
-            const interval = setInterval(() =>
-                fetch("http://localhost:3001/teams")
-                    .then((res) => res.json())
-                    .then((data) => setTeamsData(data))
-                    .catch(err => {
-                        setError(err.message);
-                    }), 1000);
-            return () => {
-                clearInterval(interval);
-            };
-        }
-    }, [getError]);
-
-    useEffect(() => {
-        if (!getError) {
-            const interval = setInterval(() =>
-                fetch("http://localhost:3001/teams")
-                    .then((res) => res.json())
-                    .then((data) => setTeamsData(data))
-                    .catch(err => {
-                        setError(err.message);
-                    }), 1000);
-            return () => {
-                clearInterval(interval);
-            };
-        }
-    }, [getError]);
+    }, [getError, getData, getKillData, getTeamsData]);
 
     return (
         <div className="GameInfo">
@@ -82,7 +38,7 @@ const GameInfo = () => {
                     <h2>Game State: {getData[0].game_state}</h2>
                 </div>
                     <h1>Live Kill Feed</h1><table id="livekillscontainer">
-                        {getKillData.map((event) => {
+                        {getKillData && getKillData.map((event) => {
                             return (
                                 <tr>
                                     {renderKillFeed(event)}
@@ -92,7 +48,7 @@ const GameInfo = () => {
                     </table>
 
                     <h1>Teams Information</h1><table id="livekillscontainer">
-                        {getTeamsData.map((team) => {
+                        {getTeamsData && getTeamsData.map((team) => {
                             return (
                                 <tr>
                                     <td>
@@ -103,7 +59,7 @@ const GameInfo = () => {
                                     </td>
                                     <td>
                                         <h3>Members:</h3>
-                                        {team.team_member.split(",").map((member) => {
+                                        {team.team_member && team.team_member.split(",").map((member) => {
                                             return (
                                                 <h4>{member}</h4>
                                             );

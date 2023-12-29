@@ -6,28 +6,21 @@ const Stats = () => {
     const [getError, setError] = useState(null);
 
     useEffect(() => {
-        fetch("http://localhost:3001/players")
-            .then((res) => res.json())
-            .then((data) => setData(data))
-            .catch(err => {
-                setError(err.message);
-            });
-    }, []);
-
-    useEffect(() => {
         if (!getError) {
-            const interval = setInterval(() =>
-                fetch("http://localhost:3001/players")
-                    .then((res) => res.json())
-                    .then((data) => setData(data))
-                    .catch(err => {
-                        setError(err.message);
-                    }), 1000);
-            return () => {
-                clearInterval(interval);
-            };
+            Promise.all([
+                fetch('http://localhost:3001/players'),
+            ])
+                .then(([resP]) =>
+                    Promise.all([resP.json()])
+                )
+                .then(([resP]) => {
+                    setData(resP);
+                })
+                .catch(err => {
+                    setError(err.message);
+                });
         }
-    }, [getError]);
+    }, [getError, getData]);
 
     return (
         <div className="Stats">
